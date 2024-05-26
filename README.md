@@ -34,6 +34,10 @@ Liberty view: Electrical models (delay, power).
 HDL view: Behavioral models.
 SPICE/CDL view: Circuit models.
 Layout views: Abstract and detailed (GDS).
+
+
+
+![Screenshot 2024-05-26 210622](https://github.com/AnoushkaTripathi/DIGITAL_VLSI_SoC_Design_and-planning_Training/assets/98522737/87695cbe-0663-4d95-b6b2-119ff617a763)
 Floor and Power Planning
 
 Floor Planning: Partitioning the chip die and placing I/O pads.
@@ -69,6 +73,4 @@ STA: OpenSTA for timing analysis.
 DRC: Magic VLSI for design rule checking.
 LVS: Netgen for layout vs. schematic verification.
 ## Screenshots
-
-![App Screenshot](https://imagetolink.com/ib/cweAKKhAqH)
 
