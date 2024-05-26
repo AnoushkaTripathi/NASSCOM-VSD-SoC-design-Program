@@ -35,3 +35,9 @@ desired functionality and meets fabrication requirements
 ![fggdgf](https://github.com/AnoushkaTripathi/DIGITAL_VLSI_SoC_Design_and-planning_Training/assets/98522737/d256eedc-480c-4997-ad78-8e5438094956)
 
 ![designabstraction](https://github.com/AnoushkaTripathi/DIGITAL_VLSI_SoC_Design_and-planning_Training/assets/98522737/20b95cf6-161a-4b5e-95c0-0e89af44ce67)
+
+
+The “Y chart” in VLSI (Very Large Scale Integration) refers to a graphical
+representation that illustrates the interrelation between the design,
+fabrication, and test processes in semiconductor manufacturing. It is called
+the “Y chart” because of its shape, which resembles the letter “Y”
