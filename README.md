@@ -1,6 +1,7 @@
 
 
 
+
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
 
@@ -47,6 +48,38 @@ The “Y chart” in VLSI (Very Large Scale Integration) refers to a graphical
 representation that illustrates the interrelation between the design,
 fabrication, and test processes in semiconductor manufacturing. It is called
 the “Y chart” because of its shape, which resembles the letter “Y”
+
+
+# Introduction to IC Design components and terminologies
+
+- Core
+
+   A core is an area in the chip where the fundamental logic of the design is placed. It encapsulates all the combinational circuit, soft and hard IPs, and nets.
+
+- Die
+
+   Die is an area of chip that encapsulates the core and IO pads. Die is imprinted multiple times along the silicon area or wafer to increase the throughput.
+
+- IO Pads
+
+   IO pads are the pins that act as the source of communication between core and the outside world. Pad cells surround the rectangular metal patches where external bonds are made. input,output and power pad.
+
+  
+
+<img width="198" alt="ic_components" src="https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/509a7633-a81b-49ef-b798-482f5c6cbd02">
+
+
+ 
+- IPs
+
+    Foundary IPs are manually designed or need some human interference (or intelligence) essentially to define and create them like SRAM, ADC, DAC, PLLs.
+- PDKs
+
+    PDKs are interface between foundary and design engineers. PDKs contains set of files to model fabrication process for the design tools used to design IC like device models, DRC, LVS, Physical extraction, layers, LEF, standard cell libraries, timing libraries etc. SkyWater 130nm is the PDK used in this workshop specifically sky130_fd_sc_hd and openLANE is built around this PDK.
+
+
+
+
 
 
 
@@ -112,11 +145,5 @@ Understanding the openlane directory
         lvs: Layout Versus Schematic check files.
         pex: Parasitic Extraction files.
 ```
-
-
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
 
 
