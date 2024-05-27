@@ -1,5 +1,10 @@
 
 
+
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+
+
+
 ![Logo](https://www.vlsisystemdesign.com/wp-content/uploads/2016/12/vsd_logo.jpg)
 
 
@@ -107,3 +112,11 @@ Understanding the openlane directory
         lvs: Layout Versus Schematic check files.
         pex: Parasitic Extraction files.
 ```
+
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+
