@@ -24,7 +24,8 @@ Understood the significance of floor planning in chip partitioning and I/O pad p
 
 
 
-## DAY 1
+## Day 1
+
 
 The RTL to GDSII flow is a process in VLSI design that converts an RTL
 description of a digital circuit into a physical layout ready for fabrication. It
@@ -41,3 +42,68 @@ The “Y chart” in VLSI (Very Large Scale Integration) refers to a graphical
 representation that illustrates the interrelation between the design,
 fabrication, and test processes in semiconductor manufacturing. It is called
 the “Y chart” because of its shape, which resembles the letter “Y”
+
+
+
+## Day 1 Labs
+Understanding the openlane directory 
+
+1.  Understanding the use of various linux commands
+
+![Screenshot from 2024-05-27 09-04-24](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/03e2af36-5489-43fa-9faf-ee4f3d7fa647)
+
+
+```bash
+  ls --help
+```
+
+```bash
+ openlane/
+├── pdk/
+│   ├── sky130A/
+│   │   ├── libs.ref/
+│   │   │   ├── stdcells/
+│   │   │   │   ├── sky130_fd_sc_hd/
+│   │   │   │   │   ├── lef/
+│   │   │   │   │   ├── lib/
+│   │   │   │   │   ├── gds/
+│   │   │   │   │   ├── verilog/
+│   │   │   ├── io/
+│   │   ├── libs.tech/
+│   │   │   ├── magic/
+│   │   │   ├── openroad/
+│   │   │   ├── klayout/
+│   │   │   ├── drc/
+│   │   │   ├── lvs/
+│   │   │   ├── pex/
+├── sky130B/
+│   ├── libs.ref/
+│   │   ├── stdcells/
+│   │   ├── io/
+│   ├── libs.tech/
+│   │   ├── magic/
+│   │   ├── openroad/
+│   │   ├── klayout/
+│   │   ├── drc/
+│   │   ├── lvs/
+│   │   ├── pex/
+```
+
+```bash
+  Key Files and Directories:
+
+    libs.ref: Houses the design libraries, including standard cells, IO cells, and other related files.
+        lef: Library Exchange Format files describing the cell layouts.
+        lib: Liberty files for timing and power analysis.
+        gds: GDSII files containing the graphical layout of the cells.
+        verilog: Verilog models of the cells.
+
+    libs.tech: Contains technology files tailored for specific EDA tools.
+        magic: Magic technology files.
+        klayout: KLayout technology files and layer properties.
+        ngspice: SPICE models for circuit simulation.
+        openroad: Files for OpenROAD flow.
+        drc: Design Rule Check files.
+        lvs: Layout Versus Schematic check files.
+        pex: Parasitic Extraction files.
+```
