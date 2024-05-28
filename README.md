@@ -50,7 +50,7 @@ fabrication, and test processes in semiconductor manufacturing. It is called
 the “Y chart” because of its shape, which resembles the letter “Y”
 
 
-# Introduction to IC Design components and terminologies
+#  IC Design components and terminologies
 
 - Core
 
