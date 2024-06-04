@@ -462,9 +462,6 @@ Placement plays a crucial role in VLSI (Very Large Scale Integration) design. It
 ![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/1642d8ce-8285-4eb9-a20f-30c230bcf22e)
 
 
-
-## VLSI Design Documentation
-
 ### Inputs
 | Item                    | Description                                                                                   |
 |-------------------------|-----------------------------------------------------------------------------------------------|
@@ -550,7 +547,79 @@ This guide demonstrates how to create a basic CMOS inverter netlist, perform DC 
 
 Magic layout view to cmos inverter
 To get the cell files refer  
-![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/ee73ffe3-68fa-4d11-b433-841548ff7831)
+ [vsdstdcelldesign](https://github.com/nickson-jose/vsdstdcelldesign) 
+
+To extract the parasitics and characterize the cell design use below commands in tkcon window.
+
+    extract all
+    ext2spice cthresh 0 rthresh 0
+    ext2spice
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/3071b576-84ac-420c-9ad8-9c8afac1f35f)
+
+Modify the file according to 
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/d6f08b62-ae42-4283-abd4-23e9dbef5637)
+
+Now the next step is to run the SPICE file in ngspice tool by using command ngspice sky130_inv.spice
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/9a095bc2-e916-4821-ba31-e48643c4ba97)
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/353107b0-7adb-434d-9ff4-eb45e3bfdb39)
+
+# Inverter Characterization using Sky130 Model Files
+
+In this lab, we will characterize the inverter using ngspice and Sky130 model files. The goal is to extract key parameters from the simulation results.
+
+## Parameters to Characterize
+
+1. **Rise Time:**
+   - The time taken for the output waveform to transition from 20% to 80% of its maximum value.
+   - Using data points:
+     - x0 = 6.16138e-09, y0 = 0.660007
+     - x1 = 6.20366e-09, y1 = 2.64009
+   - Rise time = x1 - x0 = 0.0422 ns
+
+2. **Fall Time:**
+   - The time taken for the output waveform to transition from 80% to 20% of its maximum value.
+   - Using data points:
+     - x0 = 8.04034e-09, y0 = 2.64003
+     - x1 = 8.06818e-09, y1 = 0.659993
+   - Fall time = x1 - x0 = 0.0278 ns
+
+3. **Propagation Delay:**
+   - The time taken for a 50% transition at the output (0 to 1) corresponding to a 50% transition at the input (1 to 0).
+   - Using data points:
+     - x0 = 2.18449e-09, y0 = 1.64994
+     - x1 = 2.15e-09, y1 = 1.65011
+   - Propagation delay = x1 - x0 = 0.034 ns
+
+4. **Cell Fall Delay:**
+   - The time taken for a 50% transition at the output (1 to 0) corresponding to a 50% transition at the input (0 to 1).
+   - Using data points:
+     - x0 = 4.05432e-09, y0 = 1.65
+     - x1 = 4.05001e-09, y1 = 1.65
+   - Cell fall delay = x1 - x0 = 0.0043 ns
+
+## LEF File Creation
+Now that we have successfully characterized the inverter, the next step is to create a LEF (Library Exchange Format) file.
+
+
+# Day 4
+
+## Introduction to LEF Files in VLSI Design
+In VLSI (Very Large Scale Integration) design, LEF (Library Exchange Format) files play a crucial role in interfacing between layout tools and place-and-route (PnR) tools. Here’s what you need to know:
+
+Purpose of LEF Files:
+
+The entire layout information of a block (whether it’s a macro or a standard cell) is not necessary for PnR tools.
+PnR tools require minimal information, including the PR boundary (bounding box) and pin positions.
+LEF files provide an abstract representation of the block, exposing only the essential details needed for PnR.
+## Day 4 Labs
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/7068a406-8138-4245-aa7e-0b99659f74b9)
+
 ## images
 
 ![Screenshot from 2024-05-27 12-02-21](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/9c8c0753-a272-485c-a7e4-!c8739c8b9bbb)
@@ -669,26 +738,8 @@ To get the cell files refer
  - [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
 
 
-## API Reference
+## 🔗 Links
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://663d078622096c25eed3ceff--lighthearted-pasca-dc5929.netlify.app/)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/anoushkastripathi/)
 
-#### Get all items
-
-```http
-  GET /api/items
-```
-
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `api_key` | `string` | **Required**. Your API key |
-
-#### Get item
-
-```http
-  GET /api/items/${id}
-```
-
-
-#### add(num1, num2)
-
-Takes two numbers and returns the sum.
 
