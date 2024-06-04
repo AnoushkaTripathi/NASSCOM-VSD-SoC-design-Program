@@ -345,7 +345,212 @@ This ensures that the necessary files are organized and accessible during subseq
 ![Screenshot 2024-05-28 124638](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/c13c800c-7837-4619-a007-6cd9302a4927)
 
 
-## Day 2
+# Day 2
+
+## Good FloorPlan Vs Bad FloorPlan and Introduction to Library Cells
+Chip FloorPlanning Considerations
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/441d1181-07f7-400e-ac18-647b45307664)
+
+Utilization Factor and Aspect Ratio
+In order to find out the Utilization Factor and Aspect Ratio, first we need to know how to define height and width of core and die areas.
+
+- Core is an area in a chip which is used to place all the logic cells and components in a chip. It is the place where logic lies in a chip.
+
+- Die is an area that encircles the core area and used for placing I/O related components.
+
+
+The height and width of core area will be decided by the netlist of the design. It will be based on the no.of components required in order to execute the logic and the height and width of the die area will be dependent on the core area height and width.
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/1b589248-1388-4bab-a098-e19fe2f4fa8e)
+
+For example, lets consider a netlist that is having two logic gates and two flipflops each having area of 1 sq.unit. The netlist contains 4 elements and the minimum total area required for the core area will be 4 sq.units.
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/9aea0843-89ab-4fc0-8ec6-9ad6f38d406f)
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/ca37db25-2ab9-4254-a210-9520e97eb3bd)
+
+
+*Utilization Factor :*  Utilization Factor is defined as "The ratio of the core area occupied by the netlist to the total core area".For a good FloorPlan, The Utilization Factor should never be '1' because when the Utilization factor becomes '1' , there will be no place for adding additional logic if needed and it will be considered as a bad FloorPlan.
+
+
+`Utilization Factor = (Area occupied by netlist / Total core area)`
+
+*Aspect Ratio :*  Aspect Ratio is defined as "The ratio of Height of the core to the width of the core". If the Aspect ratio is '1' , then the core is said to be in a square shape and other than '1' the core will be a rectangle.
+
+`Aspect Ratio = (Height of the core / Width of the core)`
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/7997122f-8e7d-401e-a2b2-1b42e12987d1)
+
+
+In this case, when calculated
+
+- Utilization factor = (4 squnits)/(4 squnits) = 1
+
+- Aspect Ratio = (2 units)/(2 units) = 1 //The core is in a square shape.
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/c7dceb3d-4a84-41b0-ac5f-e328d8f5f63e)
+
+In this case, when calculated
+
+- Utilization factor = (4 squnits)/(8 squnits) = 0.5
+
+- Aspect Ratio = (2 units)/(4 units) = 0.5 //The core is in a rectangular shape.
+
+
+# Day 2 Labs
+# Steps to run floorplan using OpenLANE
+
+For Floorplan to run smoothly, as a designer we should take care of some switches, that makes changes to the floorplan when changed. For example Utilization factor and aspect ratio are also part of switches. Designer should cross check these switches before initializing floorplan whether they are alligned with the project or not. Below image shows different types of switches in floorplan stage.
+
+    % run_floorplan
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/35118e28-4c6d-4e1e-b8a8-d36d01f26078)
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/67e04602-0aaf-4704-8e23-d0f943487d3c)
+
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/aff6e83c-7e78-4856-acec-a51545f8585c)
+
+ Once the floorplan is complete, you can review the generated report to assess aspects such as die area. However, to visualize the design in a graphical user interface (GUI), you should use the MAGIC tool.
+
+
+ ![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/0a9df52d-68a2-465a-937f-1d0bfdf6f6d5)
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/e38856b0-f107-464f-ae4a-81684d7fa40d)
+
+Review Floorplan layout in magic
+## Design Alignment Instructions
+
+### Centering the Design:
+1. Press `S` to select the entire design.
+2. Press `V` to vertically align it to the middle of the screen.
+
+### Zooming In on a Specific Area:
+1. Left-click and drag to select the desired region.
+2. Right-click to bring up the context menu.
+3. Press `Z` to zoom in on the selected area.
+
+### Getting Details of a Cell:
+1. Move your cursor to the cell of interest.
+2. Press `S` to select the cell.
+3. In the `tkcon` window, enter the command "what"  to display cell details.
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/bb1aafc8-34f5-4705-86f6-763950dbe4e0)
+
+
+## Placement in VLSI Design
+
+Placement plays a crucial role in VLSI (Very Large Scale Integration) design. It involves determining the physical locations of standard cells or logic elements within a chip or block. Let's break it down:
+
+1. **Global Placement:**
+   - Global placement assigns general locations to movable objects (cells).
+   - Some overlaps between placed objects are allowed during this stage.
+   - The goal is to achieve a rough layout that satisfies area constraints.
+
+2. **Detailed Placement:**
+   - Detailed placement refines the object locations obtained from global placement.
+   - It enforces non-overlapping constraints and ensures that cells are placed on legal cell sites.
+   - The quality of detailed placement significantly impacts subsequent routing stages.
+
+`magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &`
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/1642d8ce-8285-4eb9-a20f-30c230bcf22e)
+
+
+
+## VLSI Design Documentation
+
+### Inputs
+| Item                    | Description                                                                                   |
+|-------------------------|-----------------------------------------------------------------------------------------------|
+| PDKs                    | Process Design Kits (PDKs) provide technology-specific information for chip design.          |
+| DRC and LVS rules       | Design Rule Check (DRC) and Layout vs. Schematic (LVS) rules ensure layout compliance.        |
+| SPICE models            | These models describe transistor behavior for circuit simulation.                             |
+| Library & User-defined specs | Custom libraries and specifications specific to your project.                                 |
+
+### Design Steps
+1. **Circuit Design:**
+   - Create the logical schematic of your circuit.
+   - Define the functionality and connections of standard cells.
+
+2. **Layout Design:**
+   - Use layout tools (e.g., MAGIC) to create the physical layout.
+   - Follow design rules and guidelines for placement and routing.
+
+3. **Characterization using GUNA:**
+   - Perform timing, power, and noise characterizations.
+   - Validate the design against specifications.
+
+### Outputs
+- **CDL (Circuit Description Language):** A textual representation of the circuit.
+- **GDSII:** The layout file in GDSII format for fabrication.
+- **LEF (Library Exchange Format):** Contains information about cell sizes, pin locations, and other details.
+- **Spice Extracted Netlist:** Includes parasitic information for circuit simulation.
+- **Timing, Noise, and Power Libraries:** Generated during characterization.
+
+
+
+
+# Day 3 labs
+
+
+## CMOS Inverter Simulation with ngspice
+
+This guide demonstrates how to create a basic CMOS inverter netlist, perform DC and transient analyses using ngspice, and understand key static and dynamic characteristics.
+
+## Static Characteristics
+
+1. **Switching Threshold (Vth):**
+   - The voltage at which the inverter transitions from the high state (logic 1) to the low state (logic 0).
+2. **Input Low Voltage (Vil):**
+   - The maximum input voltage considered as logic 0.
+3. **Input High Voltage (Vih):**
+   - The minimum input voltage considered as logic 1.
+4. **Output Low Voltage (Vol):**
+   - The voltage at which the output transitions from high to low.
+5. **Output High Voltage (Voh):**
+   - The voltage at which the output transitions from low to high.
+6. **Noise Margins:**
+   - The voltage range between Vil and Vol (low noise margin) and between Vih and Voh (high noise margin).
+
+## Dynamic Characteristics
+
+1. **Propagation Delays:**
+   - The time taken for the output to change after a change in input.
+2. **Rise Time (tr):**
+   - The time taken for the output to transition from Vol to Voh.
+3. **Fall Time (tf):**
+   - The time taken for the output to transition from Voh to Vol.
+
+
+
+# Design library cell using Magic Layout and ngspice characterization
+## Creating Standard Cell Layout
+
+1. **Design the Inverter Layout:**
+   - Use a layout tool (such as MAGIC) to create the inverter layout.
+   - Follow process-specific design rules and guidelines.
+   - Place standard cells (transistors, metal layers, etc.) based on the logical schematic.
+
+2. **Extraction Process:**
+   - After layout creation, extract parasitic capacitances and resistances.
+   - In the `tkcon` window, execute the command `extract all`.
+   - This generates an extracted file with parasitic information (e.g., capacitances, interconnect resistance).
+   - The extracted file is saved in the `vsdstdcelldesign` directory.
+
+3. **SPICE Netlist:**
+   - Use the extracted data to create a SPICE-compatible netlist (usually in `.sp` or `.cir` format).
+   - Include transistor models, capacitances, and resistances.
+   - Use this netlist for simulation in tools like ngspice.
+
+Magic layout view to cmos inverter
+To get the cell files refer  
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/ee73ffe3-68fa-4d11-b433-841548ff7831)
 ## images
 
 ![Screenshot from 2024-05-27 12-02-21](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/9c8c0753-a272-485c-a7e4-!c8739c8b9bbb)
@@ -486,5 +691,4 @@ This ensures that the necessary files are organized and accessible during subseq
 #### add(num1, num2)
 
 Takes two numbers and returns the sum.
-
 
