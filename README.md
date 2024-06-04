@@ -1,7 +1,6 @@
 
 
 
-
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
 
@@ -39,6 +38,8 @@ involves stages like RTL synthesis, floor planning, placement, routing, and
 ultimately generating the GDSII file format, which contains the layout data.
 This meticulous process ensures the final IC layout accurately reflects the
 desired functionality and meets fabrication requirements
+
+
 ![fggdgf](https://github.com/AnoushkaTripathi/DIGITAL_VLSI_SoC_Design_and-planning_Training/assets/98522737/d256eedc-480c-4997-ad78-8e5438094956)
 
 ![designabstraction](https://github.com/AnoushkaTripathi/DIGITAL_VLSI_SoC_Design_and-planning_Training/assets/98522737/20b95cf6-161a-4b5e-95c0-0e89af44ce67)
@@ -49,8 +50,12 @@ representation that illustrates the interrelation between the design,
 fabrication, and test processes in semiconductor manufacturing. It is called
 the “Y chart” because of its shape, which resembles the letter “Y”
 
+## Overview of QFN-48 Chip, Pads, Core, Die, and IPs
 
-#  IC Design components and terminologies
+VSD Squadron Board: This is a VSD Board that you can see below. Here, we concentrate more on the enclosed region, which houses the "Microprocessor," which we will use the RTL to GDS flow to design from the abstract level to the fabrication level.
+
+
+## Introduction to IC Design components and terminologies
 
 - Core
 
@@ -64,12 +69,8 @@ the “Y chart” because of its shape, which resembles the letter “Y”
 
    IO pads are the pins that act as the source of communication between core and the outside world. Pad cells surround the rectangular metal patches where external bonds are made. input,output and power pad.
 
-  
-
-<img width="198" alt="ic_components" src="https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/509a7633-a81b-49ef-b798-482f5c6cbd02">
 
 
- 
 - IPs
 
     Foundary IPs are manually designed or need some human interference (or intelligence) essentially to define and create them like SRAM, ADC, DAC, PLLs.
@@ -77,6 +78,121 @@ the “Y chart” because of its shape, which resembles the letter “Y”
 
     PDKs are interface between foundary and design engineers. PDKs contains set of files to model fabrication process for the design tools used to design IC like device models, DRC, LVS, Physical extraction, layers, LEF, standard cell libraries, timing libraries etc. SkyWater 130nm is the PDK used in this workshop specifically sky130_fd_sc_hd and openLANE is built around this PDK.
 
+## Introduction to RISC-V
+ISA: ISA is known as "Instruction Set Architecture".It is merely a means of interacting with the computer. Generally speaking, we use coding languages like C, Java, and others to write programs that must be performed by the system, but machines are unable to comprehend these languages. Here's when ISA enters the picture. The written codes will be translated from assembly language to binary, or machine comprehensible language, using ISA. The RISC V ISA is the most recent ISA to be published, and it serves this purpose.
+
+
+## From Software Applications to Hardware
+
+In real life, we typically interact with application software (apps) to communicate with hardware. But how does this process work exactly? Between the application software and the hardware, there is a layer called system software. The applications interface with the system software, which then translates them into a language the hardware can understand, namely binary language.
+
+The system software is comprised of several layers:
+
+  -  Operating System (OS): In addition to general tasks like handling input/output operations, memory allocation, and low-level system functions, the OS translates application software into corresponding code in languages such as C, C++, or Java.
+
+   - Compiler: The compiler takes the code produced by the OS and converts it into an instruction set (e.g., .exe files). These instructions are tailored to the specific type of hardware being used.
+
+   - Assembler: The assembler then converts these executable files into binary language, which the hardware can understand and execute to perform the desired operations.
+
+##  OpenLane: Introduction to Components of Open-Source Digital ASIC Design
+
+To design an open-source digital ASIC, several key components are required:
+
+   - RTL Designs
+- EDA Tools
+- PDK Data
+
+What are RTL Designs?
+
+RTL (Register-Transfer-Level) design is a critical phase in the VLSI design flow, focused on creating electronic circuits using integrated circuits (ICs). It specifies a digital circuit by describing the flow of digital signals between hardware registers and the logical operations performed on these signals.
+What are EDA Tools?
+
+EDA (Electronic Design Automation) tools are software applications used to design and verify the functionality of integrated circuits (ICs). They ensure that the IC meets the required performance and density specifications.
+What is PDK Data?
+
+PDK (Process Design Kit) is a set of files used to model a fabrication process for EDA tools during IC design. This kit includes:
+
+  -  Process Design Rules: DRC (Design Rule Check), LVS (Layout Versus Schematic), PEX (Parasitic Extraction)
+ Device Models
+Digital Standard Cell Libraries
+
+ I/O Libraries
+
+## Simplified RTL to GDS Flow
+
+The simplified RTL to GDS flow begins with an RTL file and, through a series of stages, produces a GDS file, which can be sent to a foundry for fabrication. The steps in the RTL to GDS flow include:
+
+    Synthesis:
+        The RTL file is converted into a circuit using components from the Standard Cell Library.
+        Standard Cells in the library have a regular layout with the same height but different widths.
+        Each cell has various models based on electrical, HDL, Spice, and layout (abstract and detailed) parameters.
+
+    Floor Planning & Power Planning:
+        Floor Planning: Determines the position of components on the chip to minimize area, including the placement of I/O pins, ports, and pads.
+        Power Planning: Designs the power supply network (VDD and GND) using power rings, power straps, and power pads, typically on the top metal layers for minimal resistance and delay.
+
+    Placement:
+        Components are placed within the designated areas from the floor planning stage.
+        Standard Cells required in the design are also placed within their cell boundaries.
+        Placement is performed in two stages: Global Placement (where cells may overlap) and Detailed Placement (where cells are optimally placed following placement rules).
+
+    CTS (Clock Tree Synthesis):
+        Clock routing is performed before signal routing to address clock skew, the difference in time for the clock to reach various destinations.
+        Symmetric Tree Structures (H-tree, I-tree, X-tree) are used to eliminate clock skew.
+
+    Routing:
+        After clock routing, signal routing is performed using the remaining metal layers.
+        Routing is divided into Global Routing (generates a routing guide based on PDK instructions) and Detailed Routing (actual routing according to the guide).
+
+    Sign-off:
+        Once routing is completed, the chip undergoes various checks during the sign-off stage:
+            Physical Verification Checks: Design Rule Check (DRC) and Layout vs. Schematic (LVS). DRC verifies design rule compliance, while LVS ensures functional correctness against the gate-level netlist.
+            Timing Checks: Static Timing Analysis (STA) checks the design for timing violations.
+
+## Introduction to OpenLANE Detailed ASIC Design Flow
+
+The image illustrates the detailed ASIC design flow in OpenLANE. The process begins with the Design RTL, which undergoes RTL synthesis using Yosys and ABC to produce an optimized gate-level netlist. This netlist is then subjected to STA (Static Timing Analysis) to check for timing violations. Following STA, Design for Test (DFT) is performed, though this step is optional and uses the FAULT tool.
+
+FAULT (for DFT) includes:
+
+   - Scan Insertion
+   - Automatic Test Pattern Generation (ATPG)
+   - Test Pattern Compaction
+   - Fault Coverage
+   - Fault Simulation
+
+Screenshot 2024-04-28 090349
+
+After DFT, the next phase is Physical Implementation, also known as Automated Place and Route (PnR), using OpenRoad.
+
+OpenRoad (for Physical Implementation) includes:
+
+    Floor/Power Planning
+    End Decoupling Capacitors and Tap Cells Insertion
+    Placement: Global and Detailed
+    Post-Placement Optimization
+    Clock Tree Synthesis
+    Routing: Global and Detailed
+
+During PnR, Logic Equivalence Checking (LEC) must be performed for each design change to ensure the functionality remains unchanged after netlist modifications. An important step during physical implementation is the "Fake Antenna Diodes Insertion Script."
+
+Dealing with Antenna Rule Violations:
+When a metal wire segment is fabricated, it can act as an antenna. Reactive ion etching can cause charge accumulation on the wire, potentially damaging transistor gates during fabrication.
+
+Solutions:
+
+Bridging: Attaching a higher layer intermediary, which requires router awareness.
+
+Add antenna diode cell to leak away the charges. Antenna diodes are provided by the SCL. For this we took a preventive approach.
+Add a Fake antenna didoe next to every cell input after placement.  Run the Antenna Checker(Magic) on the routed layout.If the checker reports violation on the cell input pin, replace the fake diode cell by a real one
+
+Screenshot 2024-04-28 094148
+
+And at the end, we perform Physical Verification. Which includes DRC(Design Rule Checking) , LVS(Layout Vs Schematic). Along with the P.V we also performs STA to check for timing violations in the design.
+
+MAGIC is used for DRC and SPICE Extraction from Layout.
+
+MAGIC and Netgen are used for LVS by comparing Extracted SPICE by MAGIC and Verilog Netlist.
 
 
 
@@ -84,12 +200,31 @@ the “Y chart” because of its shape, which resembles the letter “Y”
 
 
 ## Day 1 Labs
-Understanding the openlane directory 
+
 
 1.  Understanding the use of various linux commands
 
+  -  pwd : It displays the present working directory and its path.
+
+   - cd : Using this command we can move in both ways in the directory tree.
+
+- ls : It lists all the sub-directories and files present in the current directory.
+
+ - mkdir : Using this command, we can create a new directory.
+
+  -  rmdir : Using his command, we can delete an existing directory.
+
+ -   rm : This command is used to delete the files.
+
+  -  help : using this command we can know the working of any command.
+
+   - clear : This command clears the terminal.
+
+
+Understanding the openlane directory 
 ![Screenshot from 2024-05-27 09-04-24](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/03e2af36-5489-43fa-9faf-ee4f3d7fa647)
 
+# RTL2GDS OpenLANE ASIC Flow
 
 ```bash
   ls --help
@@ -143,7 +278,104 @@ Understanding the openlane directory
         openroad: Files for OpenROAD flow.
         drc: Design Rule Check files.
         lvs: Layout Versus Schematic check files.
-        pex: Parasitic Extraction files.
+        pex: Parasitic Extraction files.![Screenshot from 2024-05-28 10-58-19](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/7a59a63e-171f-42d0-8ba0-f3947915923e)
+
+
 ```
+![Screenshot from 2024-05-27 09-58-21](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/cbe8d20c-6bff-450c-9492-bf5be94f965b)
+
+![Screenshot from 2024-05-27 12-02-21](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/9c8c0753-a272-485c-a7e4-!c8739c8b9bbb)
+![Screenshot from 2024-05-28 10-20-40](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/498fa493-f289-4241-ae6e-58ea967f12a6)
 
 
+
+
+![Screenshot from 2024-05-27 08-56-26](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/e1e4228b-42a1-48b1-bab2-0b202e482c84)
+
+![Screenshot from 2024-05-28 11-55-32](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/30da9be7-fd12-42ac-a5b3-09bc4cc3f2a3)
+
+![Screenshot from 2024-05-28 11-55-37](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/93026d4a-98de-4f8f-8177-f11f92d5ca65)
+
+
+![Screenshot from 2024-05-28 11-55-18](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/cdd6bea7-5ab7-47aaae6a-93e03f566d4d)
+![Screenshot from 2024-05-28 11-55-28](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/bfdca5b6-2932-4bf7-982b-cfe7469f15d4)
+
+
+
+![Screenshot from 2024-05-28 11-57-45](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/6d2b129e-5a19-489e-a39a-454cc2cbb787)
+![Screenshot from 2024-05-28 12-19-46](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/37a8efd7-937c-4ecf-a6af-0af3b09aaae7)
+![Screenshot from 2024-05-28 12-20-00](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/abcd5dda-307a-4366-9e33-e989094e7027)
+![Screenshot from 2024-05-28 12-29-54](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/088ec513-3b9b-429e
+-a06a-af1497d6baa8)
+![Screenshot from 2024-05-28 12-36-02](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/7cd36088-0d0e-4af7-9e0a-942e301452ee)
+![Screenshot from 2024-05-28 12-31-13](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/dd068a2a-ebde-4bcf-9d90-b31f6c28b607)
+![Screenshot from 2024-05-28 12-44-35](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/b70c0548-8785-4b8e-b1cf-d82f6f69532a)
+
+![Screenshot from 2024-05-28 13-26-29](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/074f534b-ad6c-485f-b25e-43019f6d4075)
+![Screenshot from 2024-05-28 13-29-02](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/1efa9293-cbf4-41fa-9313-065fd53b8e34)
+![Screenshot from 2024-05-28 13-31-39](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/844351cc-6e33-400d-ac06-f114761276d8)
+![Screenshot from 2024-05-28 13-44-30](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/fd49b96b-ad7b-4ecf-a18b-db688dc89e94)
+
+![Screenshot from 2024-05-28 14-06-47](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/39e2aa9d-e13c-4a89-a87f-46bd274f3b8b)
+![Screenshot from 2024-05-28 14-35-44](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/384b2e37-8f12-4638-9a08-016a86225a05)
+![Screenshot from 2024-05-28 15-05-32](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/f54f64e4-69ee-4824-a44d-c705609b6017)
+
+![Screenshot from 2024-05-28 16-09-13](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/13ac49a7-0174-4344-a1c3-fb4801228d47)
+
+![Screenshot from 2024-05-28 16-22-07](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/f4a2d2eb-770b-4a07-b807-75c7e3067f06)
+![Screenshot from 2024-05-28 16-27-40](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/263f4790-9399-436b-ad2d-3ed91ac544f3)
+![Screenshot from 2024-05-28 16-27-48](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/ec5283f3-1dfa-4f4c-85a2-5bfd953f6563)
+![Screenshot from 2024-05-28 16-59-56](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/16f6c74d-ce13-4130-a59f-23fa4a2b2663)
+![Screenshot from 2024-05-28 17-09-32](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/45e21b01-1f71-480b-8f5f-1d9cd0a87f27)
+![Screenshot from 2024-05-28 17-17-59](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/2049ac06-ec79-402c-bd95-73023d1b0372)
+![Screenshot from 2024-05-28 17-27-43](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/4b5bd47b-8174-4820-8a3f-a780c0d02235)
+![Screenshot from 2024-05-28 17-27-48](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/7f320f36-b16c-4bc6-9e1a-7fb373e7716d)
+![Screenshot from 2024-05-28 19-21-27](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/1ba8ff89-f095-4028-b9bb-838e6d25fe04)
+![Screenshot from 2024-05-28 21-56-33](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/968e3983-8993-48b8-85de-c2761fb293fe)
+![Screenshot from 2024-05-29 10-07-35](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/9d5ecf41-f1e7-4cac-9971-ba2baf502152)
+![Screenshot from 2024-05-29 16-15-04](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/54f8f984-a98b-4232-bc88-12e6471deb2e)
+![Screenshot from 2024-05-29 17-09-16](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/a9e14d2b-b6a7-485c-b46e-1695f8cab04e)
+![Screenshot from 2024-05-29 19-53-35](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/83874dcb-e669-4b85-851b-c8e45f2d73c8)
+
+
+
+![Screenshot from 2024-05-29 20-10-40](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/ceaad2a4-d1cc-4b9e-8886-70ed12337f6d)
+
+![Screenshot from 2024-05-29 21-48-11](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/c751f16c-35c7-4cf6-af59-71fc8f896afe)
+
+![Screenshot from 2024-05-29 22-28-19](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/3e5f8b74-ff52-48b7-8606-35b46e226858)
+![Screenshot from 2024-05-30 07-44-41](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/e9d88e51-2da3-4b5b-8321-91e8f42921db)
+
+![Screenshot from 2024-05-30 07-44-41](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/c8702f9c-bce0-4f08-a00f-83655dd77261)
+![Screenshot from 2024-05-30 14-57-45](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/03b33315-ba0b-47dc-938a-9cebfbf97d95)
+![Screenshot from 2024-05-31 21-09-00](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/dae73ed5-33cb-49db-a0a2-a34251da2cdc)
+![Screenshot from 2024-05-31 21-42-57](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/9f3aac51-d968-4e56-911b-70bbd848d0d7)
+![Screenshot from 2024-06-01 09-32-45](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/123272f2-f912-45bc-9a6c-f9d810d00544)
+
+![Screenshot from 2024-06-01 10-00-02](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/3f610bcb-c0d7-4b38-a64b-8cfa1f95a07e)
+![Screenshot from 2024-06-01 10-11-39](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/6ed4f871-ab9d-4976-b043-011527097a76)
+![Screenshot from 2024-06-01 10-13-22](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/5355353f-3929-41d1-b481-01094c6a14c2)
+![Screenshot from 2024-06-01 10-31-29](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/f7c98dbc-6f08-4d4c-81bf-fb0145f8846e)
+![Screenshot from 2024-06-01 10-55-53](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/c8450b9e-1582-4056-a57e-b633066839b7)
+![Screenshot from 2024-06-01 11-39-35](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/03f62ddc-dd56-43f0-ab15-378f35d5c70f)
+![Screenshot from 2024-06-01 11-43-39](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/3ab84f5a-93cc-45cd-9e67-c44ddf63cf08)
+![Screenshot from 2024-06-01 12-00-26](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/8cf9d022-0e8d-467e-81b3-adfc9ee3b33e)
+![Screenshot from 2024-06-01 12-20-30](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/b0a90c31-8965-4253-8945-0c3550819825)
+![Screenshot from 2024-06-01 12-56-04](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/b100de53-4455-4984-87d2-d1b8380ca771)
+![Screenshot from 2024-06-01 14-59-28](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/466adafc-f6b8-459f-8588-355433e06c0c)
+![Screenshot from 2024-06-01 14-59-39](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/1308a875-21d4-4e0f-9c66-1ccece31ac91)
+![Screenshot from 2024-06-01 15-01-46](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/9ff451c7-f2aa-4206-8653-2d52f652ded4)
+![Screenshot from 2024-06-01 15-04-35](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/613f1a72-ac92-4bcd-aa7e-819cde146f5a)
+![Screenshot from 2024-06-01 15-29-33](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/a489c4e0-db50-4233-9118-306ce76a4589)
+![Screenshot from 2024-06-01 15-42-19](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/f0a17b45-8801-4035-83fa-03ccb31a9fb3)
+![Screenshot from 2024-06-01 21-36-20](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/5cb3b762-d90b-4f72-99dc-d5f9acf3c8f7)
+![Screenshot from 2024-06-01 22-46-39](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/68ac298e-e500-47fa-80b4-00f824894490)
+![Screenshot from 2024-06-01 22-52-03](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/e843d6a9-1b74-4726-ac55-a4f1284e7fb3)
+![Screenshot from 2024-06-01 22-52-19](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/c183bd8e-681a-4f90-9b5a-12e3cb2829e7)
+![Screenshot from 2024-06-02 15-05-17](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/458c0d7b-c032-49a2-ace2-a7d06ae71658)
+![Screenshot from 2024-06-03 08-06-08](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/6b098b24-dcde-460f-beb1-6b23e7bbcf79)
+![Screenshot from 2024-06-03 12-29-38](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/be978678-6dea-403a-b932-2f0efbf95074)
+![Screenshot from 2024-06-03 12-29-43](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/c56a4082-b2f2-4028-aa40-f5e012b5fb46)
+![Screenshot from 2024-06-03 13-56-29](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/4f1d235d-dc4a-4147-80c4-857712a245aa)
+![Screenshot from 2024-06-03 13-57-08](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/a9793469-71e5-4443-bf9e-210c7f35b802)
+![Screenshot from 2024-06-03 15-06-59](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/db0352ca-b2e1-40b3-adf0-6b1c4d66d964)
