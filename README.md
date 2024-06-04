@@ -1,6 +1,8 @@
 
 
 
+
+
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
 
@@ -53,10 +55,13 @@ the “Y chart” because of its shape, which resembles the letter “Y”
 ## Overview of QFN-48 Chip, Pads, Core, Die, and IPs
 
 VSD Squadron Board: This is a VSD Board that you can see below. Here, we concentrate more on the enclosed region, which houses the "Microprocessor," which we will use the RTL to GDS flow to design from the abstract level to the fabrication level.
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/e7140942-4235-4659-8b90-a2e1911d97d5)
 
 
 ## Introduction to IC Design components and terminologies
 
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/1f4b8c57-cb88-4b6f-8780-746b22c76cb7)
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/97662e7a-1aef-4ce1-816a-46d0bac73ddc)
 - Core
 
    A core is an area in the chip where the fundamental logic of the design is placed. It encapsulates all the combinational circuit, soft and hard IPs, and nets.
@@ -80,6 +85,7 @@ VSD Squadron Board: This is a VSD Board that you can see below. Here, we concent
 
 ## Introduction to RISC-V
 ISA: ISA is known as "Instruction Set Architecture".It is merely a means of interacting with the computer. Generally speaking, we use coding languages like C, Java, and others to write programs that must be performed by the system, but machines are unable to comprehend these languages. Here's when ISA enters the picture. The written codes will be translated from assembly language to binary, or machine comprehensible language, using ISA. The RISC V ISA is the most recent ISA to be published, and it serves this purpose.
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/32072838-15b1-463a-b39c-35f0ca6ec3b1)
 
 
 ## From Software Applications to Hardware
@@ -87,6 +93,8 @@ ISA: ISA is known as "Instruction Set Architecture".It is merely a means of inte
 In real life, we typically interact with application software (apps) to communicate with hardware. But how does this process work exactly? Between the application software and the hardware, there is a layer called system software. The applications interface with the system software, which then translates them into a language the hardware can understand, namely binary language.
 
 The system software is comprised of several layers:
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/0a1902fe-dc15-4ae8-991f-aad281c09e41)
+
 
   -  Operating System (OS): In addition to general tasks like handling input/output operations, memory allocation, and low-level system functions, the OS translates application software into corresponding code in languages such as C, C++, or Java.
 
@@ -97,6 +105,7 @@ The system software is comprised of several layers:
 ##  OpenLane: Introduction to Components of Open-Source Digital ASIC Design
 
 To design an open-source digital ASIC, several key components are required:
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/3ee3cd37-d8c7-4df7-9780-e53e73c79f74)
 
    - RTL Designs
 - EDA Tools
@@ -121,28 +130,42 @@ Digital Standard Cell Libraries
 ## Simplified RTL to GDS Flow
 
 The simplified RTL to GDS flow begins with an RTL file and, through a series of stages, produces a GDS file, which can be sent to a foundry for fabrication. The steps in the RTL to GDS flow include:
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/dfcf7210-a2de-4613-912c-f1c034294cbe)
+
+
 
     Synthesis:
         The RTL file is converted into a circuit using components from the Standard Cell Library.
         Standard Cells in the library have a regular layout with the same height but different widths.
         Each cell has various models based on electrical, HDL, Spice, and layout (abstract and detailed) parameters.
 
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/599e076a-2457-4a68-9a08-3b633402d22e)
+
     Floor Planning & Power Planning:
         Floor Planning: Determines the position of components on the chip to minimize area, including the placement of I/O pins, ports, and pads.
         Power Planning: Designs the power supply network (VDD and GND) using power rings, power straps, and power pads, typically on the top metal layers for minimal resistance and delay.
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/eb783ee4-4d8f-4c51-903f-2b9604260995)
 
     Placement:
         Components are placed within the designated areas from the floor planning stage.
         Standard Cells required in the design are also placed within their cell boundaries.
         Placement is performed in two stages: Global Placement (where cells may overlap) and Detailed Placement (where cells are optimally placed following placement rules).
 
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/dc935b28-2c27-4c45-8975-43f0e967c2a7)
+
+
     CTS (Clock Tree Synthesis):
         Clock routing is performed before signal routing to address clock skew, the difference in time for the clock to reach various destinations.
         Symmetric Tree Structures (H-tree, I-tree, X-tree) are used to eliminate clock skew.
 
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/66062429-e200-4679-8c61-bbd253ee44fd)
+
+
     Routing:
         After clock routing, signal routing is performed using the remaining metal layers.
         Routing is divided into Global Routing (generates a routing guide based on PDK instructions) and Detailed Routing (actual routing according to the guide).
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/6aa48de1-e1b3-4752-b38a-e0b996cf4aae)
+
 
     Sign-off:
         Once routing is completed, the chip undergoes various checks during the sign-off stage:
@@ -152,6 +175,13 @@ The simplified RTL to GDS flow begins with an RTL file and, through a series of 
 ## Introduction to OpenLANE Detailed ASIC Design Flow
 
 The image illustrates the detailed ASIC design flow in OpenLANE. The process begins with the Design RTL, which undergoes RTL synthesis using Yosys and ABC to produce an optimized gate-level netlist. This netlist is then subjected to STA (Static Timing Analysis) to check for timing violations. Following STA, Design for Test (DFT) is performed, though this step is optional and uses the FAULT tool.
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/837ca897-9005-40c0-acda-a4adb68836bf)
+
+OpenLane  started as an Open Source Flow for a true Open Source Tape-out experiment.It was from e-fabless.It is a platform which supports different tools such as Yosys,OpenRoad,Magic,KLlayout and some other Open source tools.It integrates the various steps of Silicon Implementation and abstracts it. At e-fabless they have an SOC family called Strive. Strive is a family of open everything SOCs having Open PDK, Open RTL, Open EDA.
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/6265bb94-5c2a-42d8-82e8-67bd2feef055)
+
+
 
 FAULT (for DFT) includes:
 
@@ -161,7 +191,8 @@ FAULT (for DFT) includes:
    - Fault Coverage
    - Fault Simulation
 
-Screenshot 2024-04-28 090349
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/607eb8bf-fe92-4e83-9757-e28598f3a93d)
+
 
 After DFT, the next phase is Physical Implementation, also known as Automated Place and Route (PnR), using OpenRoad.
 
@@ -182,11 +213,12 @@ When a metal wire segment is fabricated, it can act as an antenna. Reactive ion 
 Solutions:
 
 Bridging: Attaching a higher layer intermediary, which requires router awareness.
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/f4cf5f24-135e-443c-befc-cf86aed71aac)
+
 
 Add antenna diode cell to leak away the charges. Antenna diodes are provided by the SCL. For this we took a preventive approach.
 Add a Fake antenna didoe next to every cell input after placement.  Run the Antenna Checker(Magic) on the routed layout.If the checker reports violation on the cell input pin, replace the fake diode cell by a real one
 
-Screenshot 2024-04-28 094148
 
 And at the end, we perform Physical Verification. Which includes DRC(Design Rule Checking) , LVS(Layout Vs Schematic). Along with the P.V we also performs STA to check for timing violations in the design.
 
@@ -194,12 +226,18 @@ MAGIC is used for DRC and SPICE Extraction from Layout.
 
 MAGIC and Netgen are used for LVS by comparing Extracted SPICE by MAGIC and Verilog Netlist.
 
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/0fdee7ae-caf0-428a-8136-5dd34a0938e4)
 
 
 
 
+
+
+# RTL2GDS OpenLANE ASIC Flow Practical implementation
 
 ## Day 1 Labs
+
+![Screenshot from 2024-05-27 08-56-26](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/e1e4228b-42a1-48b1-bab2-0b202e482c84)
 
 
 1.  Understanding the use of various linux commands
@@ -221,48 +259,7 @@ MAGIC and Netgen are used for LVS by comparing Extracted SPICE by MAGIC and Veri
    - clear : This command clears the terminal.
 
 
-Understanding the openlane directory 
-![Screenshot from 2024-05-27 09-04-24](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/03e2af36-5489-43fa-9faf-ee4f3d7fa647)
 
-# RTL2GDS OpenLANE ASIC Flow
-
-```bash
-  ls --help
-```
-
-```bash
- openlane/
-├── pdk/
-│   ├── sky130A/
-│   │   ├── libs.ref/
-│   │   │   ├── stdcells/
-│   │   │   │   ├── sky130_fd_sc_hd/
-│   │   │   │   │   ├── lef/
-│   │   │   │   │   ├── lib/
-│   │   │   │   │   ├── gds/
-│   │   │   │   │   ├── verilog/
-│   │   │   ├── io/
-│   │   ├── libs.tech/
-│   │   │   ├── magic/
-│   │   │   ├── openroad/
-│   │   │   ├── klayout/
-│   │   │   ├── drc/
-│   │   │   ├── lvs/
-│   │   │   ├── pex/
-├── sky130B/
-│   ├── libs.ref/
-│   │   ├── stdcells/
-│   │   ├── io/
-│   ├── libs.tech/
-│   │   ├── magic/
-│   │   ├── openroad/
-│   │   ├── klayout/
-│   │   ├── drc/
-│   │   ├── lvs/
-│   │   ├── pex/
-```
-
-```bash
   Key Files and Directories:
 
     libs.ref: Houses the design libraries, including standard cells, IO cells, and other related files.
@@ -278,19 +275,84 @@ Understanding the openlane directory
         openroad: Files for OpenROAD flow.
         drc: Design Rule Check files.
         lvs: Layout Versus Schematic check files.
-        pex: Parasitic Extraction files.![Screenshot from 2024-05-28 10-58-19](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/7a59a63e-171f-42d0-8ba0-f3947915923e)
+        pex: Parasitic Extraction files.
 
 
-```
-![Screenshot from 2024-05-27 09-58-21](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/cbe8d20c-6bff-450c-9492-bf5be94f965b)
 
-![Screenshot from 2024-05-27 12-02-21](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/9c8c0753-a272-485c-a7e4-!c8739c8b9bbb)
+
+
+![Screenshot from 2024-05-28 10-58-19](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/7a59a63e-171f-42d0-8ba0-f3947915923e)
+
+To run in interactive mode (step by step mode)
+
+    bash-4.2$ ./flow.tcl -interactive
+    
+    
+`Package import and check`
+
+    % package require openlane
+
+`Prepare design`
+
+To prepare and setup the design
+
+    % prep -design picorv32a
+
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/cb2fcb1f-989f-4f64-9713-9b8f94e23131)
+
+Once the preparation is complete, a new directory with the current date will be generated within the “runs” folder. Inside this directory, all the necessary subdirectories for storing results, reports, and other relevant data will be created.
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/c2017d45-9c58-48ae-a670-95990cf51a81)
+
+
+The preparation step involves the following actions for the picorv32a design within the openLANE flow:
+
+**Directory Structure Setup:**
+
+A new directory structure is created to organize the design files.
+This structure includes subdirectories for different components (e.g., results, reports).
+
+- LEF Merging:
+The technology LEF (.tlef) and cell LEF (.lef) files are merged into a unified format.The technology LEF contains layer information (such as metal layers), while the cell LEF contains cell informations.
+- Design Placement:
+All design-related files are placed under the designs directory.
+This ensures that the necessary files are organized and accessible during subsequent steps.
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/7fef32f0-2f61-4505-9f71-d4d457393105)
+
+
+| `config.tcl`	 | contains the configurations used by openLANE |                      
+| :-------- | :-------                                     | 
+| `src`      |  contains verilog files and constraints file|
+
+
+
+
 ![Screenshot from 2024-05-28 10-20-40](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/498fa493-f289-4241-ae6e-58ea967f12a6)
 
+` Synthesis `
+   % run_synthesis
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/6eb7ec6b-9857-4c84-ab1e-eab611a6201c)
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/fa1c6b93-38b0-48e1-a76d-766b20e77884)
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/717ae07d-12ad-4e3a-9a0c-6a87d41228f4)
+
+![Screenshot 2024-05-28 124638](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/c13c800c-7837-4619-a007-6cd9302a4927)
+
+
+## Day 2
+## images
+
+![Screenshot from 2024-05-27 12-02-21](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/9c8c0753-a272-485c-a7e4-!c8739c8b9bbb)
 
 
 
-![Screenshot from 2024-05-27 08-56-26](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/e1e4228b-42a1-48b1-bab2-0b202e482c84)
+
 
 ![Screenshot from 2024-05-28 11-55-32](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/30da9be7-fd12-42ac-a5b3-09bc4cc3f2a3)
 
@@ -379,3 +441,50 @@ Understanding the openlane directory
 ![Screenshot from 2024-06-03 13-56-29](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/4f1d235d-dc4a-4147-80c4-857712a245aa)
 ![Screenshot from 2024-06-03 13-57-08](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/a9793469-71e5-4443-bf9e-210c7f35b802)
 ![Screenshot from 2024-06-03 15-06-59](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/db0352ca-b2e1-40b3-adf0-6b1c4d66d964)
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/5c07b47f-5c19-434b-a873-1ab6cbe8898c)
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/eb2ed4b2-5032-435c-89ff-2ffe8766aa8b)
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/7d32b18c-5525-40b5-a4a9-c2ea37bee739)
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/0a9296b2-d901-4cd9-a4b1-f5345bd49a2c)
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/66f08e88-2412-479f-9304-13b998b6c47f)
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/27ece5cb-99e9-4416-93b3-efad07b54434)
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/e61d9dce-44da-4a1d-84d2-a0d03477a1da)
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/2318b46f-a1ef-43c7-b3c9-80f37f95f441)
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/fea0bb21-91f0-48e1-8cfd-2cf413a8b127)
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/8de7cb89-f819-4692-b7ea-8fada6d76f2a)
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/26edb0a7-2af8-404a-bafd-b50128a58c74)
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/043932b1-8791-4c23-8393-bdb82d72c482)
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/4377e411-8fcf-4f90-b12a-bb28718fd198)
+
+## Acknowledgements
+
+ - [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
+ - [Awesome README](https://github.com/matiassingers/awesome-readme)
+ - [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
+
+
+## API Reference
+
+#### Get all items
+
+```http
+  GET /api/items
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `api_key` | `string` | **Required**. Your API key |
+
+#### Get item
+
+```http
+  GET /api/items/${id}
+```
+
+
+#### add(num1, num2)
+
+Takes two numbers and returns the sum.
+
+
