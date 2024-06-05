@@ -3,6 +3,8 @@
 
 
 
+
+
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
 
@@ -566,7 +568,6 @@ Now the next step is to run the SPICE file in ngspice tool by using command ngsp
 ![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/9a095bc2-e916-4821-ba31-e48643c4ba97)
 
 
-![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/353107b0-7adb-434d-9ff4-eb45e3bfdb39)
 
 # Inverter Characterization using Sky130 Model Files
 
@@ -616,10 +617,73 @@ Purpose of LEF Files:
 The entire layout information of a block (whether it’s a macro or a standard cell) is not necessary for PnR tools.
 PnR tools require minimal information, including the PR boundary (bounding box) and pin positions.
 LEF files provide an abstract representation of the block, exposing only the essential details needed for PnR.
+
+
+
+| Cell LEF	 | Abstract view of the cell which holds information about PR boundary, pin positions and metal layer information.  |
+|---------------|---------------|
+| Technology LEF | Holds information about the metal layers, via, DRC technology used by placer and router.|
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/ac0ac635-a5dc-4531-a065-a6ec16dbab3c)
+
+
+# VLSI Routing: Tracks and Routes
+
+In VLSI design, understanding tracks and routes is essential for successful interconnect design. Let's break it down:
+
+## Tracks
+
+- **Definition:**
+  - Tracks represent predefined horizontal and vertical paths on each metal layer.
+  - They serve as guidelines for routing wires (metal traces) within a chip.
+
+- **Purpose:**
+  - Tracks help maintain uniform spacing and alignment during routing.
+  - They simplify the routing process by providing fixed paths.
+
+## Routes
+
+- **Definition:**
+  - Routes are the actual metal traces that carry signals (such as interconnects or wires).
+  - These traces can be placed over the tracks, following specified routing rules.
+
+- **Functionality:**
+  - Routes connect different components (cells) within the chip.
+  - They form the wiring network for data flow.
+
+## `tracks.info` File
+
+- The `tracks.info` file:
+  - Provides information about horizontal and vertical tracks available on each metal layer.
+  - Specifies pitch, spacing, and other relevant details necessary for efficient routing.
 ## Day 4 Labs
+
+
+Use the command `magic -d XR` to open the Magic tool
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/314d5337-9add-4e42-8f0c-7bd31439829b)
+
+# Using Magic Tool: Filling an Area with Metal 3 and Creating a VIA2 Mask
+
+In this guide, we'll demonstrate how to fill a selected area with metal 3 and create a VIA2 mask using the Magic layout tool.
+
+## Steps:
+
+1. **Select an Area and Fill with Metal 3:**
+   - Open the Magic GUI.
+   - Select the desired area on your layout.
+   - Guide the pointer to the metal 3 layer.
+   - Press `P` to fill the selected region with metal 3.
+
+2. **Create the VIA2 Mask:**
+   - Open the `tkcon` terminal within Magic.
+   - Type the command: `cif see VIA2`.
+   - The metal 3-filled area will now be associated with the VIA2 mask.
+
 
 ![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/7068a406-8138-4245-aa7e-0b99659f74b9)
 
+## **Lab exercise to fix Poly-9 error in Sky130 tech file**
 ## images
 
 ![Screenshot from 2024-05-27 12-02-21](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/9c8c0753-a272-485c-a7e4-!c8739c8b9bbb)
@@ -741,5 +805,6 @@ LEF files provide an abstract representation of the block, exposing only the ess
 ## 🔗 Links
 [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://663d078622096c25eed3ceff--lighthearted-pasca-dc5929.netlify.app/)
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/anoushkastripathi/)
+
 
 
