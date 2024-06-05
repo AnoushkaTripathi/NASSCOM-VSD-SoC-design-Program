@@ -557,6 +557,55 @@ This guide demonstrates how to create a basic CMOS inverter netlist, perform DC 
    - Use the extracted data to create a SPICE-compatible netlist (usually in `.sp` or `.cir` format).
    - Include transistor models, capacitances, and resistances.
    - Use this netlist for simulation in tools like ngspice.
+
+
+## Introduction to LEF Files in VLSI Design
+In VLSI (Very Large Scale Integration) design, LEF (Library Exchange Format) files play a crucial role in interfacing between layout tools and place-and-route (PnR) tools. Here’s what you need to know:
+
+Purpose of LEF Files:
+
+The entire layout information of a block (whether it’s a macro or a standard cell) is not necessary for PnR tools.
+PnR tools require minimal information, including the PR boundary (bounding box) and pin positions.
+LEF files provide an abstract representation of the block, exposing only the essential details needed for PnR.
+
+
+
+| Cell LEF	 | Abstract view of the cell which holds information about PR boundary, pin positions and metal layer information.  |
+|---------------|---------------|
+| Technology LEF | Holds information about the metal layers, via, DRC technology used by placer and router.|
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/ac0ac635-a5dc-4531-a065-a6ec16dbab3c)
+
+
+# VLSI Routing: Tracks and Routes
+
+In VLSI design, understanding tracks and routes is essential for successful interconnect design. Let's break it down:
+
+## Tracks
+
+- **Definition:**
+  - Tracks represent predefined horizontal and vertical paths on each metal layer.
+  - They serve as guidelines for routing wires (metal traces) within a chip.
+
+- **Purpose:**
+  - Tracks help maintain uniform spacing and alignment during routing.
+  - They simplify the routing process by providing fixed paths.
+
+## Routes
+
+- **Definition:**
+  - Routes are the actual metal traces that carry signals (such as interconnects or wires).
+  - These traces can be placed over the tracks, following specified routing rules.
+
+- **Functionality:**
+  - Routes connect different components (cells) within the chip.
+  - They form the wiring network for data flow.
+
+## `tracks.info` File
+
+- The `tracks.info` file:
+  - Provides information about horizontal and vertical tracks available on each metal layer.
+  - Specifies pitch, spacing, and other relevant details necessary for efficient routing.
 # Day 3 labs
 
 
@@ -621,56 +670,9 @@ In this lab, we will characterize the inverter using ngspice and Sky130 model fi
 Now that we have successfully characterized the inverter, the next step is to create a LEF (Library Exchange Format) file.
 
 
-# Day 4
-
-## Introduction to LEF Files in VLSI Design
-In VLSI (Very Large Scale Integration) design, LEF (Library Exchange Format) files play a crucial role in interfacing between layout tools and place-and-route (PnR) tools. Here’s what you need to know:
-
-Purpose of LEF Files:
-
-The entire layout information of a block (whether it’s a macro or a standard cell) is not necessary for PnR tools.
-PnR tools require minimal information, including the PR boundary (bounding box) and pin positions.
-LEF files provide an abstract representation of the block, exposing only the essential details needed for PnR.
+wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
 
 
-
-| Cell LEF	 | Abstract view of the cell which holds information about PR boundary, pin positions and metal layer information.  |
-|---------------|---------------|
-| Technology LEF | Holds information about the metal layers, via, DRC technology used by placer and router.|
-
-![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/ac0ac635-a5dc-4531-a065-a6ec16dbab3c)
-
-
-# VLSI Routing: Tracks and Routes
-
-In VLSI design, understanding tracks and routes is essential for successful interconnect design. Let's break it down:
-
-## Tracks
-
-- **Definition:**
-  - Tracks represent predefined horizontal and vertical paths on each metal layer.
-  - They serve as guidelines for routing wires (metal traces) within a chip.
-
-- **Purpose:**
-  - Tracks help maintain uniform spacing and alignment during routing.
-  - They simplify the routing process by providing fixed paths.
-
-## Routes
-
-- **Definition:**
-  - Routes are the actual metal traces that carry signals (such as interconnects or wires).
-  - These traces can be placed over the tracks, following specified routing rules.
-
-- **Functionality:**
-  - Routes connect different components (cells) within the chip.
-  - They form the wiring network for data flow.
-
-## `tracks.info` File
-
-- The `tracks.info` file:
-  - Provides information about horizontal and vertical tracks available on each metal layer.
-  - Specifies pitch, spacing, and other relevant details necessary for efficient routing.
-## Day 4 Labs
 
 **VLSI Layout Geometries and DRC Errors**
 
@@ -759,117 +761,396 @@ Insert new commands  in sky130A.tech file to update drc
  ![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/e91a3f3c-42c6-4383-b51c-f5fe3bd82e74)
 
 
-## images
+## DRC error as geometrical construct
 
-![Screenshot from 2024-05-27 12-02-21](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/9c8c0753-a272-485c-a7e4-!c8739c8b9bbb)
+N well rules 
 
-
-
-
-
-![Screenshot from 2024-05-28 11-55-32](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/30da9be7-fd12-42ac-a5b3-09bc4cc3f2a3)
-
-![Screenshot from 2024-05-28 11-55-37](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/93026d4a-98de-4f8f-8177-f11f92d5ca65)
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/2ee6e495-203d-415a-bc13-5a817b401abb)
 
 
-![Screenshot from 2024-05-28 11-55-18](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/cdd6bea7-5ab7-47aaae6a-93e03f566d4d)
-![Screenshot from 2024-05-28 11-55-28](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/bfdca5b6-2932-4bf7-982b-cfe7469f15d4)
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/19362396-33bc-4d03-88c3-783aa85dfd37)
+
+New commands inserted in sky130A.tech file to update drc
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/5c21a6ef-6fa4-4a52-b835-f1cde0c1ee34)
+
+Updated Tech file 
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/681097ff-f036-43dc-9851-b2809a9a64d2)
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/7d6951b0-5ae4-46fe-a02b-724e555fa700)
+
+# Day 4 : Pre-layout timing analysis and importance of good clock tree 
+
+# Timing Modeling Using Delay Tables and Converting Grid Info to Track Info
+
+In this section, we'll explore timing modeling using delay tables and the process of converting grid information to track information. Let's break it down step by step:
+
+## Timing Modeling with Delay Tables
+
+1. **Delay Tables:**
+   - Delay tables provide information about the delay (propagation time) of signals through various components (such as gates, wires, and interconnects).
+   - These tables help estimate signal arrival times and ensure proper timing in the design.
+
+2. **Usage:**
+   - During the physical design process, delay tables are used to model the behavior of standard cells, macros, and other components.
+   - They guide the placement and routing tools to optimize signal paths for timing closure.
+
+## Converting Grid Info to Track Info
+
+1. **Purpose:**
+   - In physical design, we need to convert grid information (such as rows and columns) into track information.
+   - Tracks represent predefined horizontal and vertical paths on each metal layer.
+
+2. **Considerations:**
+   - When designing standard cells, keep the following in mind:
+     - Input and output ports should align with the intersection of vertical and horizontal tracks.
+     - The standard cell's width should be an odd multiple of the track pitch, and its height should be an odd multiple of the vertical track pitch.
+
+3. **LEF File Extraction:**
+   - To proceed further, we require the LEF (Library Exchange Format) file for the Inverter cell.
+   - Extract it from the current Inverter cell to provide essential information for the place-and-route (PNR) process.
+
+4. **Understanding Tracks:**
+   - Open the `tracks.info` file to learn more about the horizontal and vertical tracks available on each metal layer.
+   - This file specifies pitch, spacing, and other relevant details necessary for efficient routing.
 
 
 
-![Screenshot from 2024-05-28 11-57-45](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/6d2b129e-5a19-489e-a39a-454cc2cbb787)
-![Screenshot from 2024-05-28 12-19-46](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/37a8efd7-937c-4ecf-a6af-0af3b09aaae7)
-![Screenshot from 2024-05-28 12-20-00](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/abcd5dda-307a-4366-9e33-e989094e7027)
-![Screenshot from 2024-05-28 12-29-54](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/088ec513-3b9b-429e
--a06a-af1497d6baa8)
-![Screenshot from 2024-05-28 12-36-02](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/7cd36088-0d0e-4af7-9e0a-942e301452ee)
-![Screenshot from 2024-05-28 12-31-13](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/dd068a2a-ebde-4bcf-9d90-b31f6c28b607)
-![Screenshot from 2024-05-28 12-44-35](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/b70c0548-8785-4b8e-b1cf-d82f6f69532a)
 
-![Screenshot from 2024-05-28 13-26-29](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/074f534b-ad6c-485f-b25e-43019f6d4075)
-![Screenshot from 2024-05-28 13-29-02](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/1efa9293-cbf4-41fa-9313-065fd53b8e34)
-![Screenshot from 2024-05-28 13-31-39](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/844351cc-6e33-400d-ac06-f114761276d8)
-![Screenshot from 2024-05-28 13-44-30](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/fd49b96b-ad7b-4ecf-a18b-db688dc89e94)
+# Day 4 Labs
 
-![Screenshot from 2024-05-28 14-06-47](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/39e2aa9d-e13c-4a89-a87f-46bd274f3b8b)
-![Screenshot from 2024-05-28 14-35-44](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/384b2e37-8f12-4638-9a08-016a86225a05)
-![Screenshot from 2024-05-28 15-05-32](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/f54f64e4-69ee-4824-a44d-c705609b6017)
+ Commands to open the custom inverter layout
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/d84fc4fa-1e3c-4e42-8e1a-c55f8484730f)
 
-![Screenshot from 2024-05-28 16-09-13](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/13ac49a7-0174-4344-a1c3-fb4801228d47)
+    # Change directory to vsdstdcelldesign
+    cd Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
 
-![Screenshot from 2024-05-28 16-22-07](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/f4a2d2eb-770b-4a07-b807-75c7e3067f06)
-![Screenshot from 2024-05-28 16-27-40](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/263f4790-9399-436b-ad2d-3ed91ac544f3)
-![Screenshot from 2024-05-28 16-27-48](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/ec5283f3-1dfa-4f4c-85a2-5bfd953f6563)
-![Screenshot from 2024-05-28 16-59-56](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/16f6c74d-ce13-4130-a59f-23fa4a2b2663)
-![Screenshot from 2024-05-28 17-09-32](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/45e21b01-1f71-480b-8f5f-1d9cd0a87f27)
-![Screenshot from 2024-05-28 17-17-59](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/2049ac06-ec79-402c-bd95-73023d1b0372)
-![Screenshot from 2024-05-28 17-27-43](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/4b5bd47b-8174-4820-8a3f-a780c0d02235)
-![Screenshot from 2024-05-28 17-27-48](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/7f320f36-b16c-4bc6-9e1a-7fb373e7716d)
-![Screenshot from 2024-05-28 19-21-27](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/1ba8ff89-f095-4028-b9bb-838e6d25fe04)
-![Screenshot from 2024-05-28 21-56-33](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/968e3983-8993-48b8-85de-c2761fb293fe)
-![Screenshot from 2024-05-29 10-07-35](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/9d5ecf41-f1e7-4cac-9971-ba2baf502152)
-![Screenshot from 2024-05-29 16-15-04](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/54f8f984-a98b-4232-bc88-12e6471deb2e)
-![Screenshot from 2024-05-29 17-09-16](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/a9e14d2b-b6a7-485c-b46e-1695f8cab04e)
-![Screenshot from 2024-05-29 19-53-35](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/83874dcb-e669-4b85-851b-c8e45f2d73c8)
+    # Command to open custom inverter layout in magic
+    magic -T sky130A.tech sky130_inv.mag &
+
+ Commands for tkcon window to set grid as tracks of locali layer
+
+    # Get syntax for grid command
+    help grid
+
+    # Set grid values accordingly
+    grid 0.46um 0.34um 0.23um 0.17um
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/b179114d-78e3-4262-82a9-5401d638b274)
+ 
+
+Condition 1 Verified 
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/8664d63c-c5e6-4bdd-ad40-18ca5212cf2a)
 
 
+Condition 2 verified
 
-![Screenshot from 2024-05-29 20-10-40](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/ceaad2a4-d1cc-4b9e-8886-70ed12337f6d)
+Horizontal Pitch 
 
-![Screenshot from 2024-05-29 21-48-11](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/c751f16c-35c7-4cf6-af59-71fc8f896afe)
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/b2bdf188-7051-491d-85f4-b5db4a1ac66c)
 
-![Screenshot from 2024-05-29 22-28-19](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/3e5f8b74-ff52-48b7-8606-35b46e226858)
-![Screenshot from 2024-05-30 07-44-41](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/e9d88e51-2da3-4b5b-8321-91e8f42921db)
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/c80d9f83-1670-4832-90b7-f4a228e6f717)
 
-![Screenshot from 2024-05-30 07-44-41](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/c8702f9c-bce0-4f08-a00f-83655dd77261)
-![Screenshot from 2024-05-30 14-57-45](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/03b33315-ba0b-47dc-938a-9cebfbf97d95)
-![Screenshot from 2024-05-31 21-09-00](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/dae73ed5-33cb-49db-a0a2-a34251da2cdc)
-![Screenshot from 2024-05-31 21-42-57](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/9f3aac51-d968-4e56-911b-70bbd848d0d7)
-![Screenshot from 2024-06-01 09-32-45](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/123272f2-f912-45bc-9a6c-f9d810d00544)
+Condition 3 verified
 
-![Screenshot from 2024-06-01 10-00-02](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/3f610bcb-c0d7-4b38-a64b-8cfa1f95a07e)
-![Screenshot from 2024-06-01 10-11-39](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/6ed4f871-ab9d-4976-b043-011527097a76)
-![Screenshot from 2024-06-01 10-13-22](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/5355353f-3929-41d1-b481-01094c6a14c2)
-![Screenshot from 2024-06-01 10-31-29](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/f7c98dbc-6f08-4d4c-81bf-fb0145f8846e)
-![Screenshot from 2024-06-01 10-55-53](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/c8450b9e-1582-4056-a57e-b633066839b7)
-![Screenshot from 2024-06-01 11-39-35](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/03f62ddc-dd56-43f0-ab15-378f35d5c70f)
-![Screenshot from 2024-06-01 11-43-39](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/3ab84f5a-93cc-45cd-9e67-c44ddf63cf08)
-![Screenshot from 2024-06-01 12-00-26](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/8cf9d022-0e8d-467e-81b3-adfc9ee3b33e)
-![Screenshot from 2024-06-01 12-20-30](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/b0a90c31-8965-4253-8945-0c3550819825)
-![Screenshot from 2024-06-01 12-56-04](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/b100de53-4455-4984-87d2-d1b8380ca771)
-![Screenshot from 2024-06-01 14-59-28](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/466adafc-f6b8-459f-8588-355433e06c0c)
-![Screenshot from 2024-06-01 14-59-39](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/1308a875-21d4-4e0f-9c66-1ccece31ac91)
-![Screenshot from 2024-06-01 15-01-46](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/9ff451c7-f2aa-4206-8653-2d52f652ded4)
-![Screenshot from 2024-06-01 15-04-35](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/613f1a72-ac92-4bcd-aa7e-819cde146f5a)
-![Screenshot from 2024-06-01 15-29-33](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/a489c4e0-db50-4233-9118-306ce76a4589)
-![Screenshot from 2024-06-01 15-42-19](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/f0a17b45-8801-4035-83fa-03ccb31a9fb3)
-![Screenshot from 2024-06-01 21-36-20](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/5cb3b762-d90b-4f72-99dc-d5f9acf3c8f7)
-![Screenshot from 2024-06-01 22-46-39](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/68ac298e-e500-47fa-80b4-00f824894490)
-![Screenshot from 2024-06-01 22-52-03](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/e843d6a9-1b74-4726-ac55-a4f1284e7fb3)
-![Screenshot from 2024-06-01 22-52-19](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/c183bd8e-681a-4f90-9b5a-12e3cb2829e7)
-![Screenshot from 2024-06-02 15-05-17](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/458c0d7b-c032-49a2-ace2-a7d06ae71658)
-![Screenshot from 2024-06-03 08-06-08](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/6b098b24-dcde-460f-beb1-6b23e7bbcf79)
-![Screenshot from 2024-06-03 12-29-38](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/be978678-6dea-403a-b932-2f0efbf95074)
-![Screenshot from 2024-06-03 12-29-43](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/c56a4082-b2f2-4028-aa40-f5e012b5fb46)
-![Screenshot from 2024-06-03 13-56-29](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/4f1d235d-dc4a-4147-80c4-857712a245aa)
-![Screenshot from 2024-06-03 13-57-08](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/a9793469-71e5-4443-bf9e-210c7f35b802)
-![Screenshot from 2024-06-03 15-06-59](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/db0352ca-b2e1-40b3-adf0-6b1c4d66d964)
-![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/5c07b47f-5c19-434b-a873-1ab6cbe8898c)
+Vertical Pitch
 
-![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/eb2ed4b2-5032-435c-89ff-2ffe8766aa8b)
-![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/7d32b18c-5525-40b5-a4a9-c2ea37bee739)
-![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/0a9296b2-d901-4cd9-a4b1-f5345bd49a2c)
-![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/66f08e88-2412-479f-9304-13b998b6c47f)
-![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/27ece5cb-99e9-4416-93b3-efad07b54434)
-![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/e61d9dce-44da-4a1d-84d2-a0d03477a1da)
-![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/2318b46f-a1ef-43c7-b3c9-80f37f95f441)
-![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/fea0bb21-91f0-48e1-8cfd-2cf413a8b127)
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/e53b2ba1-bd70-43f1-82c8-7d7bab7bd130)
 
-![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/7e27d2aa-0b00-48a6-ab85-a908b068a567)
+
+ **Save the finalized layout with custom name and open it.**
+
+    # Command to save as
+    save sky130_vsdinv.mag
+
+Saved Layout 
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/f1bd0ad3-adcd-45f9-898e-b887531e0d47)
+
+
+Generate lef from the layout.
+
+Command for tkcon window to write lef
+
+    # lef command
+    lef write
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/9a19eb26-fdbb-43bb-b7ce-199410084d31)
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/4c7a07ed-f74b-46fe-8e25-60d3a1b70f08)
+
+Edit 'config.tcl' to change lib file and add the new extra lef into the openlane flow.
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/b29da277-c636-43c1-9e09-c74be8bddbe1)
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/a6b4c67d-68b5-45b7-918f-6d2e8dba1b10)
+
+     set ::env(LIB_SYNTH) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib"
+
+     set ::env(LIB_FASTEST) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__fast.lib"
+     set ::env(LIB_SLOWEST) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__slow.lib" 
+
+     set ::env(LIB_TYPICAL) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib"
+
+     set ::env(EXTRA_LEFS) [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/src/*.lef]
+
+**Run openlane flow synthesis with newly inserted custom inverter cell.**
+
+run_synthesis 
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/ab528845-f395-403e-b9fa-8e8dfefd275f)
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/563b32d8-8f8f-4a1d-8d0b-b905430e963a)
+
+Commands to view and change parameters to improve timing and run synthesis
+```
+# Now once again we have to prep design so as to update variables
+prep -design picorv32a -tag 24-03_10-03 -overwrite
+
+# Addiitional commands to include newly added lef to openlane flow merged.lef
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+
+# Command to display current value of variable SYNTH_STRATEGY
+echo $::env(SYNTH_STRATEGY)
+
+# Command to set new value for SYNTH_STRATEGY
+set ::env(SYNTH_STRATEGY) "DELAY 3"
+
+# Command to display current value of variable SYNTH_BUFFERING to check whether it's enabled
+echo $::env(SYNTH_BUFFERING)
+
+# Command to display current value of variable SYNTH_SIZING
+echo $::env(SYNTH_SIZING)
+
+# Command to set new value for SYNTH_SIZING
+set ::env(SYNTH_SIZING) 1
+
+# Command to display current value of variable SYNTH_DRIVING_CELL to check whether it's the proper cell or not
+echo $::env(SYNTH_DRIVING_CELL)
+
+# Now that the design is prepped and ready, we can run synthesis using following command
+run_synthesis
+
+```
+
+After running above commands 
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/39023a0c-44ae-42f3-813d-52756bfb7ccb)
+
+We get 0 slack
+
+Now run Floor plan
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/ce82bab8-b074-40c1-893e-a94cc78288d2)
+
+```
+# Now we can run floorplan
+run_floorplan
+```
+
+but it failed 
+
+So, we use 
+
+```
+init_floorplan
+place_io
+tap_decap_or
+```
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/6d6a5b21-2b06-4b7a-b513-e813d8e7e715)
+
+
+```
+
+# Now we are ready to run placement
+run_placement
+
+```
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/fd4dc6a2-f937-4fbd-8d52-67b4964a9a27)
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/b7c8cdb1-5b2a-4216-b99e-119553f2bf75)
+
+
+```
+# Command to view internal connectivity layers
+expand
+```
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/2c8de73a-0088-4ec1-b5f5-8afd2bbbcbdd)
+
+
+Do Post-Synthesis timing analysis with OpenSTA tool.
+
+Newly created pre_sta.conf for STA analysis in openlane directory
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/0bc39a88-65cd-4d83-abf5-4d60415658c9)
+
+my_base.sdc
+
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/0b5679e3-85f4-409c-b4da-b456e8c83258)
+
+```
+%run_synthesis
+```
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/e9430c3a-8788-460e-accd-b49025af742e)
+
+
+To fix this slack we use
+
+```
+# Now once again we have to prep design so as to update variables
+prep -design picorv32a -tag 24-03_10-03 -overwrite
+
+# Addiitional commands to include newly added lef to openlane flow merged.lef
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+
+# Command to display current value of variable SYNTH_STRATEGY
+echo $::env(SYNTH_STRATEGY)
+
+# Command to set new value for SYNTH_STRATEGY
+set ::env(SYNTH_STRATEGY) "DELAY 3"
+
+# Command to display current value of variable SYNTH_BUFFERING to check whether it's enabled
+echo $::env(SYNTH_BUFFERING)
+
+# Command to display current value of variable SYNTH_SIZING
+echo $::env(SYNTH_SIZING)
+
+# Command to set new value for SYNTH_SIZING
+set ::env(SYNTH_SIZING) 1
+
+# Command to display current value of variable SYNTH_DRIVING_CELL to check whether it's the proper cell or not
+echo $::env(SYNTH_DRIVING_CELL)
+
+# Now that the design is prepped and ready, we can run synthesis using following command
+run_synthesis
+```
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/0fd53d84-a89d-4723-a0a4-72c270b4c6db)
+
+Finally slack is met 
+
+
+
+**Now run Placement**
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/b821c4da-f13b-4525-a149-ea6ae8682e4e)
+
+
+
+
+# Day 5 GDS II Final step
+
+## Power Distribution Network (PDN) Generation in OpenLANE
+
+In OpenLANE, the PDN (Power Distribution Network) is crucial for proper power delivery within the chip. Let's walk through the steps to build the PDN:
+
+## 1. PDN Generation
+
+- The PDN ensures that all standard cells and macros receive adequate power.
+- It provides a network of power rails (VDD and VSS) across the chip.
+
+## 2. Using `gen_pdn` Procedure
+
+- The `gen_pdn` procedure is responsible for running the PDN generation process.
+- It sets up the power grid, defines power rails, and ensures proper connectivity.
+
+## Common Issues
+
+1. **`LIB_SYNTH_COMPLETE`:**
+   - This variable must be defined in the `config.tcl` file.
+   - It is called by the `gen_pdn` procedure defined in the `or_pdn.tcl` file.
+
+2. **`LEF_MERGED_UNPADDED`:**
+   - Ensure that this variable is correctly set in the `config.tcl` file.
+   - It provides essential information for PDN generation.
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/47791054-ae49-4fb6-a8e0-cfa71befca92)
+
+##Routing
+
+Command to perform routing
+```
+# Check value of 'CURRENT_DEF'
+echo $::env(CURRENT_DEF)
+
+# Check value of 'ROUTING_STRATEGY'
+echo $::env(ROUTING_STRATEGY)
+
+# Command for detailed route using TritonRoute
+run_routing
+```
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/22954699-23aa-461c-9dd9-68d04917fc53)
+
+Power Planning :
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/132c579c-3522-4bde-8c1f-cdacf9984466)
+
+
+Routing :
+
+Default switches set for routing are :
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/37227eee-70bc-4cb8-9049-1178e9d7f210)
+
+
+## VLSI Routing: Global Route and Detail Route
+
+In VLSI design, the routing process is divided into two main stages: global route (or fast route) and detail route. Let's explore each stage:
+
+## 1. Global Route (Fast Route)
+
+- **Purpose:**
+  - The global route focuses on quickly establishing a high-level routing solution.
+  - It divides the chip into rectangular grid cells, forming a 3D routing graph.
+
+- **Key Points:**
+  - The global route creates a routing guide, which consists of boxes (representing pins of cells).
+  - The output of the global route is a set of routing guides for each net.
+
+## 2. Detail Route
+
+- **Performed by Engine:**
+  - Detail route is executed by the engine called tritonRoute.
+  - It refines the routing solution obtained from the global route.
+
+- **Using Global Route Output:**
+  - Detail route utilizes the output from the global route, including the routing guides.
+  - Algorithms are applied to find the best possible connectivity among all the routing points.
+
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/7050b078-695e-4800-82df-6517d0a8c290)
+
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/bedc2559-2ea8-43cb-9bd0-67d267ee4cd5)
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/512e44d9-66fc-4f62-abe6-3374e787f5a0)
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/1a773bfa-f827-4cfc-bff9-bd10a44900c0)
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/6ebd7dc1-e06d-4c03-9427-2947c15b1a67)
+
+
 
 ## 🔗 Links
 [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://663d078622096c25eed3ceff--lighthearted-pasca-dc5929.netlify.app/)
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/anoushkastripathi/)
-
-![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/9e93d395-964c-42dd-b04a-89e0897a7d85)
 
