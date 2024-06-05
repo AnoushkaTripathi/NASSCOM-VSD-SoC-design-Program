@@ -3,8 +3,6 @@
 
 
 
-
-
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
 
@@ -237,7 +235,14 @@ MAGIC and Netgen are used for LVS by comparing Extracted SPICE by MAGIC and Veri
 
 # RTL2GDS OpenLANE ASIC Flow Practical implementation
 
+
+
+
 ## Day 1 Labs
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/bc3a90f7-2892-465b-aab6-dee1aca0a26d)
+
 
 ![Screenshot from 2024-05-27 08-56-26](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/e1e4228b-42a1-48b1-bab2-0b202e482c84)
 
@@ -403,6 +408,9 @@ In this case, when calculated
 # Day 2 Labs
 # Steps to run floorplan using OpenLANE
 
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/a105d2e9-d983-4522-bfdb-dab5bbcaa5db)
+
+
 For Floorplan to run smoothly, as a designer we should take care of some switches, that makes changes to the floorplan when changed. For example Utilization factor and aspect ratio are also part of switches. Designer should cross check these switches before initializing floorplan whether they are alligned with the project or not. Below image shows different types of switches in floorplan stage.
 
     % run_floorplan
@@ -495,7 +503,10 @@ Placement plays a crucial role in VLSI (Very Large Scale Integration) design. It
 
 
 
-# Day 3 labs
+## Day 3
+
+
+# Inverter Characterization using Sky130 Model Files
 
 
 ## CMOS Inverter Simulation with ngspice
@@ -546,6 +557,9 @@ This guide demonstrates how to create a basic CMOS inverter netlist, perform DC 
    - Use the extracted data to create a SPICE-compatible netlist (usually in `.sp` or `.cir` format).
    - Include transistor models, capacitances, and resistances.
    - Use this netlist for simulation in tools like ngspice.
+# Day 3 labs
+
+
 
 Magic layout view to cmos inverter
 To get the cell files refer  
@@ -658,6 +672,25 @@ In VLSI design, understanding tracks and routes is essential for successful inte
   - Specifies pitch, spacing, and other relevant details necessary for efficient routing.
 ## Day 4 Labs
 
+**VLSI Layout Geometries and DRC Errors**
+
+In this section, we explore independent example layout geometries (M3.1, M3.2, M3.5, and M3.6) and highlight the specific DRC (Design Rule Check) errors associated with each:
+
+1. **M3.1 (Metal Width DRC):**
+   - Violation: The metal trace width in M3.1 is below the specified minimum width threshold.
+   - Error: Metal width does not meet design rules.
+
+2. **M3.2 (Metal Spacing DRC):**
+   - Violation: The distance between adjacent metal traces in M3.2 does not meet the required spacing.
+   - Error: Metal spacing violation.
+
+3. **M3.5 (Via Overlapping DRC):**
+   - Violation: The vias in M3.5 overlap with each other.
+   - Error: Via overlapping issue.
+
+4. **M3.6 (Minimum Area DRC):**
+   - Violation: The enclosed area within M3.6 does not meet the specified minimum area requirement.
+   - Error: Minimum area violation.
 
 Use the command `magic -d XR` to open the Magic tool
 
@@ -684,6 +717,48 @@ In this guide, we'll demonstrate how to fill a selected area with metal 3 and cr
 ![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/7068a406-8138-4245-aa7e-0b99659f74b9)
 
 ## **Lab exercise to fix Poly-9 error in Sky130 tech file**
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/4010493f-00a7-4adc-9659-931f505036ba)
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/d06ec717-0daa-426c-a74d-badb8432d20e)
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/71f3aeac-5094-4ba9-97dd-25af197fe039)
+
+
+Commands to run in tkcon window
+
+     # Loading updated tech file
+       tech load sky130A.tech
+
+     # Must re-run drc check to see updated drc errors
+      drc check
+
+     # Selecting region displaying the new errors and getting the error messages 
+      drc why
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/06869006-06a0-4e9a-a81a-3a9c1e70ab49)
+
+Incorrectly implemented difftap.2 simple rule correction
+
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/b33b6e9b-2bbd-489e-a345-7baa6f243850)
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/d6cd4fb0-ef01-4c4d-83e7-0d46649e778f)
+
+
+Insert new commands  in sky130A.tech file to update drc
+
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/4e68ee9e-baf0-4653-a3ae-38e85e3f9245)
+ 
+ Screenshot of Fixed DRC 
+
+
+ ![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/e91a3f3c-42c6-4383-b51c-f5fe3bd82e74)
+
+
 ## images
 
 ![Screenshot from 2024-05-27 12-02-21](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/9c8c0753-a272-485c-a7e4-!c8739c8b9bbb)
@@ -790,21 +865,11 @@ In this guide, we'll demonstrate how to fill a selected area with metal 3 and cr
 ![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/2318b46f-a1ef-43c7-b3c9-80f37f95f441)
 ![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/fea0bb21-91f0-48e1-8cfd-2cf413a8b127)
 
-![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/8de7cb89-f819-4692-b7ea-8fada6d76f2a)
-![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/26edb0a7-2af8-404a-bafd-b50128a58c74)
-![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/043932b1-8791-4c23-8393-bdb82d72c482)
-![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/4377e411-8fcf-4f90-b12a-bb28718fd198)
-
-## Acknowledgements
-
- - [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
- - [Awesome README](https://github.com/matiassingers/awesome-readme)
- - [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
-
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/7e27d2aa-0b00-48a6-ab85-a908b068a567)
 
 ## 🔗 Links
 [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://663d078622096c25eed3ceff--lighthearted-pasca-dc5929.netlify.app/)
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/anoushkastripathi/)
 
-
+![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/9e93d395-964c-42dd-b04a-89e0897a7d85)
 
