@@ -943,7 +943,6 @@ After running above commands
 
 ![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/39023a0c-44ae-42f3-813d-52756bfb7ccb)
 
-We get 0 slack
 
 Now run Floor plan
 
