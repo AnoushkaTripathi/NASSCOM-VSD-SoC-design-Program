@@ -1144,10 +1144,15 @@ In VLSI design, the routing process is divided into two main stages: global rout
 
 ![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/1a773bfa-f827-4cfc-bff9-bd10a44900c0)
 ## Fast route guide
-![image](https://github.com/user-attachments/assets/3e50cbdb-37e0-4446-b4f9-e6e76d7912a2)
 ![image](https://github.com/user-attachments/assets/b9d14be7-e962-44a5-8a10-1c1021030f99)
 
 ![image](https://github.com/AnoushkaTripathi/NASSCOM-VSD-SoC-design-Program/assets/98522737/6ebd7dc1-e06d-4c03-9427-2947c15b1a67)
+##  Post routing STA
+Hold Slack
+
+![image](https://github.com/user-attachments/assets/d723aa59-546b-4bc2-bce5-d59eef84a388)
+Setup Slack
+![image](https://github.com/user-attachments/assets/d8145ffc-3f21-4449-b7c0-bb27c241cf49)
 
 ## Certificate of Completion
 
